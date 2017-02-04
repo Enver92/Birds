@@ -1,46 +1,51 @@
 var allBirds = [];
-
-function main() {
-    var birds = ["chicken", "eagle", "turkey", "pheasant", "marten", "duck"];
-    var prices = [2, 5, 3, 4, 3, 2];
-    var quantities = [7, 5, 6, 4, 8, 3];
-
-    allBirds[0] = Bird("chicken", 2, 7);
-    allBirds[1] = Bird("eagle", 5, 7);
-    allBirds[2] = Bird("turkey", 3, 6);
-}
+allBirds[0] = new Bird("chicken", 2, 7);
+allBirds[1] = new Bird("eagle", 5, 7);
+allBirds[2] = new Bird("turkey", 3, 6);
+// function main() {
+//     // var birds = ["chicken", "eagle", "turkey", "pheasant", "marten", "duck"];
+//     // var prices = [2, 5, 3, 4, 3, 2];
+//     // var quantities = [7, 5, 6, 4, 8, 3];
+//
+//
+// }
 
 function Bird(type, price, quantity) {
     this.type = type,
-        this.price = price,
-        this.sold = 0;
+    this.price = price,
+    this.sold = 0,
     this.quantity = quantity,
-        this.changePrice = function (price) {
-            this.price = price;
-        },
-        this.changeQuantity = function (quantity) {
-            this.quantity = quantity;
-        },
-        this.sell = function (q) {
-            this.quantity -= q;
-            this.sold += q;
-        }
+    this.changePrice = function (price) {
+        this.price = price;
+    },
+    this.changeQuantity = function(quantity) {
+        this.quantity = quantity;
+    },
+    this.sell = function (q) {
+        this.quantity -= q;
+        this.sold += q;
+    }
 }
 
-
-function addBird(bird) {
+function addBird(allBirds, bird) {
+    for(var i = 0; i < allBirds.length; i++) {
+        if(allBirds[i].type === bird.type) {
+            return;
+        }
+    }
     allBirds.push(bird);
 }
 
-
-// var t = "";
-// for (var i = 0; i < posts_array.length; i++){
-//     var tr = "<tr>";
-//     tr += "<td>"+posts_array[i][0]+"</td>";
-//     tr += "<td>"+posts_array[i][1]+"</td>";
-//     tr += "<td>"+posts_array[i][2]+"</td>";
-//     tr += "<td>"+posts_array[i][3]+"</td>";
-//     tr += "</tr>";
-//     t += tr;
-// }
-// document.getElementById("posts").innerHTML += t;
+function addRows(tableID, birds) {
+    var tableRef = document.getElementById(tableID);
+    for (var i = 0, n = birds.length; i < n; i++) {
+        var row = tableRef.insertRow(i);
+        var c_1 = row.insertCell(0);
+        c_1.innerHTML = allBirds[i].type;
+        var c_2 = row.insertCell(1);
+        c_2.innerHTML = allBirds[i].price;
+        var c_3 = row.insertCell(2);
+        c_3.innerHTML = allBirds[i].quantity;
+        }
+    }
+addRows('myTable', allBirds);
