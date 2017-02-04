@@ -7,3 +7,4 @@ function Bird(type, price, quantity) {
         this.sell = function(q){this.quantity -= q;}
 }
 
+
